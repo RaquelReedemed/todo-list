@@ -1,8 +1,10 @@
 //hacer compo de tipo funcional
 
 import React, { useState } from 'react';
-import {Task} from "../../src/tareas";
+import { Task } from "../../src/tareas";
 import TaskComponentHijo from './taskComponentHijo';
+import TaskForm from './taskForm';
+
 
 
 const TaskComponent = () => {
@@ -15,7 +17,7 @@ const TaskComponent = () => {
 
  //Usamos el useState para modificar el estado de las tareas
 
- const [tasks, setTasks] = useState(defaultTask1, defaultTask2, defaultTask3);
+ const [tasks, setTasks] = useState([defaultTask1, defaultTask2, defaultTask3]); //usamos corchetes para especificar que es un arrglo
 
  //creamos la funcion para completar la tarea
 
@@ -37,12 +39,12 @@ const TaskComponent = () => {
 
  //Function para a;adir una tarea
 
-/*  function addTask (task) {
+  function addTask (task) {
     const index = tasks.indexOf(task); //nos trae el indice
     const tempTask = [...tasks];  //nos crea una copia
     tempTask.push(task); //agregar una nueva tarea que tiene descripcion y compled
     setTasks(tempTask);
- } */
+ } 
  
 
     return (
@@ -62,10 +64,15 @@ const TaskComponent = () => {
                     }
                     )} 
              </div>
-           </div>     
+           </div>    
+           <TaskForm add={addTask}>
+           
+           </TaskForm> 
         </div>
     );
 }
+
+
 
 export default TaskComponent;
 

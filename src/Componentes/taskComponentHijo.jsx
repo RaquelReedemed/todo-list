@@ -1,9 +1,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Task}  from "../../src/tareas"
+import  { Task }  from "../../src/tareas"
 
-const TaskComponentHijo = ( task, complete, remove ) => {
+const TaskComponentHijo = ({ task, complete, remove }) => {
 
     //Creamos una funcion para que cambie el icono de tarea completada
 
@@ -25,8 +25,9 @@ const TaskComponentHijo = ( task, complete, remove ) => {
 }
 
    TaskComponentHijo.propTypes = {
-    task: PropTypes.instanceOf(Task).isRequired, /* Verifica que recibimos una TAREA del padre (task_list) /
-    complete: PropTypes.func.isRequired, / Va a ser una funcion que se ejecutara cuando le demos a los iconos */
+    task: PropTypes.instanceOf(Task).isRequired, /* Verifica que recibimos una TAREA del padre (task_list) 
+    complete: PropTypes.func.isRequired, /* Va a ser una funcion que se ejecutara cuando le demos a los iconos */
+    complete: PropTypes.func.isRequired,
     remove: PropTypes.func.isRequired 
     };
 
