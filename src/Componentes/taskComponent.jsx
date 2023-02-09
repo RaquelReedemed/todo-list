@@ -24,7 +24,7 @@ const TaskComponent = () => {
  function completedTask(task) {
     const index = tasks.indexOf(task); //nos trae el indice
     const tempTask = [...tasks];  //nos crea una copia
-    tempTask[index].comleted = ! tempTask[index].comleted;
+    tempTask[index].completed = ! tempTask[index].completed;
     setTasks(tempTask);
  }
 
@@ -51,7 +51,14 @@ const TaskComponent = () => {
         <div>
            <div>
              <h1>Lista de tareas</h1>
-             <div>     
+             <div>    
+
+             <div>
+             <TaskForm add={addTask}>
+           
+           </TaskForm> 
+             </div>
+
              {tasks.map((task, index) => {
                       return(      
                    <TaskComponentHijo
@@ -65,9 +72,7 @@ const TaskComponent = () => {
                     )} 
              </div>
            </div>    
-           <TaskForm add={addTask}>
            
-           </TaskForm> 
         </div>
     );
 }

@@ -21,12 +21,12 @@ const TaskForm = ({add}) => {
 
 
     return (
-        <div>
+        <div className='contenedor-form' >
            <form onSubmit={addTask} className="d-flex justify-content-center align-items-center mb-4 pt-4">
             <div className='form-outline flex-fill pt-1'>
               <input ref={descriptionRef} id="inputDescription" type="text" className="form-control form-control-xs control mt-2 " require placeholder='Task description'/>
                  <div className='pt-3 d-flex mx-auto'>
-                    <button type="submit" className='btn fondo2  ms-3 largo'>Add</button>
+                    <button type="submit" className='btn fondo2  ms-3 largo boton-add '>Add</button>
             </div>
         </div>
         </form>       
