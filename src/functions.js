@@ -5,7 +5,7 @@ import withReactContent from 'sweetalert2-react-content';
 
 
 //funcion para mostrar alertas de swetalert
-export function show_alerta(mensaje, icono, foco) {
+export function show_alerta(mensaje, icono, foco='') {
     onfocus(foco);
     const MySwal = withReactContent(Swal);
     MySwal.fire({
