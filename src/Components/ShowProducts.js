@@ -53,7 +53,6 @@ const ShowProducts = () => {
       document.getElementById('nombre').focus();
     },500)
   }
- 
 
     //validar que elos campos del formulario esten llenos antes de enviar la solicitud
     const validar = () => {
@@ -86,7 +85,7 @@ const ShowProducts = () => {
                 }
               });
 
-              if (response.status !== 201) {
+              if (response.status !== 201) { //Si la solicitud no se realizó correctamente, la función simplemente terminará sin actualizar la lista de usuarios
                 return;
               }else{ //se extrae el cuerpo de la respuesta usando data
                 const data = response.data;
@@ -127,8 +126,11 @@ const ShowProducts = () => {
           parametros={id:id, name:name.trim(), email:email.trim(), phone:phone.trim()};
           metodo= 'PUT';
 
-          axios.put(`https://jsonplaceholder.typicode.com/users/${id}`, parametros)
-          .then(response => console.log(response.data))
+
+         
+
+           /* axios.post(`https://jsonplaceholder.typicode.com/users/${id}`, parametros)
+          .then(response => console.log(response.data)) */ 
 
         }
         enviarSolicitud(metodo, parametros);
@@ -153,6 +155,40 @@ const ShowProducts = () => {
       show_alerta('Error en la solicitud', 'error');
       console.log(error)
     } )
+  }
+
+  const deleteProduct= (id,name) => {
+    const MySwal = withReactContent(Swal);
+    MySwal.fire({
+      title:'Seguro de eliminar el usuario ' +name+ '?',
+      icon: 'question', text:'No se podra dar marcha atras',
+      showCancelButton:true,confirmButtonText:'Si, eliminar',cancelButtonText:'Cancelar'
+    }).then((result) =>{
+      if(result.isConfirmed) {
+        const onDelete = async (id) => {
+          await fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+            method: 'DELETE'
+          })
+          .then((res) => {
+            //un código de estado 200 significa que la solicitud ha sido exitosa y que se ha eliminado el recurso solicitado
+            if(res.status !== 200) {//código de estado diferente a 200, el bloque de código dentro del if se ejecutará y la función deleteProduct no actualizará la lista de usuarios.
+              return
+            }else{
+              setUsers(users.filter((user) => {
+                return user.id !== id;
+              }))
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+        }
+        onDelete(id)
+      }
+      else{
+        show_alerta('El producto No fue eliminado', 'info');
+      }
+    })
   }
  
 
@@ -192,7 +228,7 @@ const ShowProducts = () => {
                     </button>
                     &nbsp;
                     {/*non-breaking-space, el espacio no se puede dividir en dos lineas*/}
-                    <button className="btn btn-danger">
+                    <button onClick={()=>deleteProduct(user.id, user.name)} className="btn btn-danger">
                       <i className="fa-solid fa-trash"></i>
                     </button>
                   </td>
